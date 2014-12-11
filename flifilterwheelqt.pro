@@ -11,6 +11,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = flifilterwheelqt
 TEMPLATE = app
 
+INCLUDEPATH += /home/xyf/fli/libfli
+#LIBS += -L/usr/lib/libfli.a
 
 SOURCES += main.cpp\
         mainwindow.cpp \

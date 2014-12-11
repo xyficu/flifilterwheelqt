@@ -27,6 +27,7 @@
     <property name="title">
      <string>&amp;File</string>
     </property>
+    <addaction name="action_muluExit"/>
    </widget>
    <addaction name="menuFLI_Filter_Wheel_CFW_12_Controller"/>
   </widget>
@@ -40,6 +41,11 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
   <action name="action_Exit">
+   <property name="text">
+    <string>&amp;Exit</string>
+   </property>
+  </action>
+  <action name="action_muluExit">
    <property name="text">
     <string>&amp;Exit</string>
    </property>
