@@ -12,11 +12,11 @@ TARGET = flifilterwheelqt
 TEMPLATE = app
 
 INCLUDEPATH += /home/xyf/fli/libfli
-#LIBS += -L/usr/lib/libfli.a
+LIBS += /usr/lib/libfli.a
 
 SOURCES += main.cpp\
         mainwindow.cpp \
-    cfw12.cpp
+    cfw12.cpp \
 
 HEADERS  += mainwindow.h \
     cfw12.h
