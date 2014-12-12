@@ -2,6 +2,10 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTimer>
+#include <QTime>
+#include <QDateTime>
+#include <QDate>
 #include "cfw12.h"
 
 namespace Ui {
@@ -23,9 +27,37 @@ private slots:
 
     void on_pushButtonFWHome_clicked();
 
+    void on_pushButtonFW3_clicked();
+
+    void on_pushButtonFW4_clicked();
+
+    void on_pushButtonFW5_clicked();
+
+    void on_pushButtonFW6_clicked();
+
+    void on_pushButtonFW7_clicked();
+
+    void on_pushButtonFW8_clicked();
+
+    void on_pushButtonFW9_clicked();
+
+    void on_pushButtonFW10_clicked();
+
+    void on_pushButtonFW11_clicked();
+
+    void UpdateStatus();
+
 private:
     Ui::MainWindow *ui;
     CFW12 *m_CFW12;
+    QTimer *m_timer;
+    QTime m_time;
+    QDate m_date;
+    QDateTime m_dateTime;
+    void SetFWPos(long pos);
+
+
+
 };
 
 #endif // MAINWINDOW_H

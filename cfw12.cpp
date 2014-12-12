@@ -3,27 +3,30 @@
 CFW12::CFW12()
 {
     dev_filterWheel = FLI_INVALID_DEVICE;
-
     InitCFW12();
-
 }
 
 CFW12::~CFW12()
 {
     FLIClose(dev_filterWheel);
-    connect = false;
+    m_connect = false;
 }
 
 bool CFW12::GetConnStatus()
 {
-    return connect;
+    return m_connect;
+}
+
+char *CFW12::GetLibVer()
+{
+    return libver;
 }
 
 
 //set the filter wheel position
 void CFW12::SetWheelPos(long filter)
 {
-    if(false == connect)
+    if(false == m_connect)
         return;
 
     if (0 != FLISetFilterPos(dev_filterWheel, filter))
@@ -36,7 +39,7 @@ void CFW12::SetWheelPos(long filter)
 //get the filter wheel position
 void CFW12::GetWheelPos(long &filter)
 {
-    if(false == connect)
+    if(false == m_connect)
         return;
 
     if (0 != FLIGetFilterPos(dev_filterWheel, &filter))
@@ -47,24 +50,31 @@ void CFW12::GetWheelPos(long &filter)
 
 }
 
+long CFW12::GetStatus()
+{
+    if(true == m_connect)
+        FLIGetActiveWheel(dev_filterWheel, &status);
+    return status;
+}
+
 void CFW12::InitCFW12()
 {
     //test if dll loads correctly
     if(FLIGetLibVersion(libver, LIBVERSIZE) != 0)
     {
-        connect = false;
+        m_connect = false;
         return;
     }
 
     //获取FLI设备列表
     if (0 != FLICreateList(FLIDOMAIN_USB | FLIDEVICE_FILTERWHEEL))
     {
-        connect = false;
+        m_connect = false;
         return;
     }
     else if (0 != FLIListFirst(&dev_filterWheel, file, MAX_PATH, name, MAX_PATH))
     {
-        connect = false;
+        m_connect = false;
         return;
     }
 
@@ -72,13 +82,13 @@ void CFW12::InitCFW12()
     if (0 == FLIOpen(&dev_filterWheel, file, (FLIDOMAIN_USB | FLIDEVICE_FILTERWHEEL)))
     {
 
-        connect = true;
+        m_connect = true;
         return;
     }
     else
     {
 
-        connect = true;
+        m_connect = false;
         return;
     }
 }
