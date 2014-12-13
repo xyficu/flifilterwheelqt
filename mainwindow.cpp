@@ -105,8 +105,11 @@ void MainWindow::UpdateStatus()
     if(true == m_CFW12->GetConnStatus())
     {
         ui->labelFLI->setText("FLI Filter Wheel connected!");
-        ui->label_Status->setText(QString::number(m_CFW12->GetStatus()));
-            m_CFW12->GetWheelPos(pos);
+        if(2 == m_CFW12->GetStatus())
+            ui->label_Status->setText("Moving...");
+        else
+            ui->label_Status->setText("Stopped");
+        m_CFW12->GetWheelPos(pos);
         ui->label_CurPos->setText(QString::number(pos));
     }
     else

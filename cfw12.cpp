@@ -3,6 +3,7 @@
 CFW12::CFW12()
 {
     dev_filterWheel = FLI_INVALID_DEVICE;
+    status = 0;
     InitCFW12();
 }
 
@@ -28,10 +29,11 @@ void CFW12::SetWheelPos(long filter)
 {
     if(false == m_connect)
         return;
-
-    if (0 != FLISetFilterPos(dev_filterWheel, filter))
+    else
     {
-        //Qmessagebox error;
+        status = 2;
+        FLISetFilterPos(dev_filterWheel, filter);
+        status = 0;
         return;
     }
 }
@@ -52,8 +54,6 @@ void CFW12::GetWheelPos(long &filter)
 
 long CFW12::GetStatus()
 {
-    if(true == m_connect)
-        FLIGetActiveWheel(dev_filterWheel, &status);
     return status;
 }
 
