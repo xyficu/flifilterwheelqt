@@ -59,7 +59,7 @@ long CFW12::GetStatus()
 
 void CFW12::InitCFW12()
 {
-    //test if dll loads correctly
+    //test if lib loads correctly
     if(FLIGetLibVersion(libver, LIBVERSIZE) != 0)
     {
         m_connect = false;

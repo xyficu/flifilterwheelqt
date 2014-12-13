@@ -7,6 +7,7 @@
 #include <QDateTime>
 #include <QDate>
 #include "cfw12.h"
+#include "about.h"
 
 namespace Ui {
 class MainWindow;
@@ -47,6 +48,10 @@ private slots:
 
     void UpdateStatus();
 
+    void on_action_Exit_triggered();
+
+    void on_action_About_triggered();
+
 private:
     Ui::MainWindow *ui;
     CFW12 *m_CFW12;
@@ -55,8 +60,6 @@ private:
     QDate m_date;
     QDateTime m_dateTime;
     void SetFWPos(long pos);
-
-
 
 };
 

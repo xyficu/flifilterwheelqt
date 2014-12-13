@@ -7,6 +7,9 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    //set window tilte
+    setWindowTitle("FLI CFW12 Controller");
+
     //initial timer
     m_timer = new QTimer(this);
     connect(m_timer, SIGNAL(timeout()), SLOT(UpdateStatus()));
@@ -127,4 +130,15 @@ void MainWindow::UpdateStatus()
     ui->label_Status->adjustSize();
     ui->label_CurPos->adjustSize();
 
+}
+
+void MainWindow::on_action_Exit_triggered()
+{
+    QApplication::exit(0);
+}
+
+void MainWindow::on_action_About_triggered()
+{
+    About a(this);
+    a.exec();
 }

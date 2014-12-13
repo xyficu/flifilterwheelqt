@@ -13,17 +13,20 @@ TEMPLATE = app
 
 #CONFIG += static
 #CONFIG += shared
-CONFIG += qt thread
+#CONFIG += qt thread
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     cfw12.cpp \
+    about.cpp
 
 HEADERS  += mainwindow.h \
-    cfw12.h
+    cfw12.h \
+    about.h
 
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    about.ui
 
 
 
@@ -34,3 +37,5 @@ INCLUDEPATH += $$PWD/
 DEPENDPATH += $$PWD/
 
 unix:!macx: PRE_TARGETDEPS += $$PWD/libfli.a
+
+OTHER_FILES +=
