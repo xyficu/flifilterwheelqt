@@ -40,19 +40,6 @@
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Current Position:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>11</x>
-      <y>51</y>
-      <width>47</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Status:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QLabel" name="label_CurPos">
     <property name="geometry">
      <rect>
@@ -92,24 +79,11 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_Status">
-    <property name="geometry">
-     <rect>
-      <x>68</x>
-      <y>51</y>
-      <width>63</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; color:#fe0000;&quot;&gt;unknown&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>80</y>
+      <y>60</y>
       <width>301</width>
       <height>128</height>
      </rect>
@@ -484,9 +458,7 @@
    <zorder>layoutWidget</zorder>
    <zorder>label</zorder>
    <zorder>labelFLI</zorder>
-   <zorder>label_2</zorder>
    <zorder>label_CurPos</zorder>
-   <zorder>label_Status</zorder>
    <zorder>label_libVer</zorder>
    <zorder>label_time</zorder>
   </widget>

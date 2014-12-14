@@ -108,10 +108,10 @@ void MainWindow::UpdateStatus()
     if(true == m_CFW12->GetConnStatus())
     {
         ui->labelFLI->setText("FLI Filter Wheel connected!");
-        if(2 == m_CFW12->GetStatus())
-            ui->label_Status->setText("Moving...");
-        else
-            ui->label_Status->setText("Stopped");
+//        if(2 == m_CFW12->GetStatus())
+//            ui->label_Status->setText("Moving...");
+//        else
+//            ui->label_Status->setText("Stopped");
         m_CFW12->GetWheelPos(pos);
         ui->label_CurPos->setText(QString::number(pos));
     }
@@ -127,7 +127,7 @@ void MainWindow::UpdateStatus()
 
     //adjust label size
     ui->labelFLI->adjustSize();
-    ui->label_Status->adjustSize();
+//    ui->label_Status->adjustSize();
     ui->label_CurPos->adjustSize();
 
 }

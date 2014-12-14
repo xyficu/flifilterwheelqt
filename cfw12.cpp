@@ -99,7 +99,20 @@ void CFW12::InitCFW12()
 
 void CFW12::CheckConn()
 {
-    if(false == m_connect)
-        InitCFW12();
+//    //获取FLI设备列表
+//    if (0 != FLICreateList(FLIDOMAIN_USB | FLIDEVICE_FILTERWHEEL))
+//    {
+//        m_connect = false;
+//    }
+//    else if (0 != FLIListFirst(&dev_filterWheel, file, MAX_PATH, name, MAX_PATH))
+//    {
+//        m_connect = false;
+//    }
+
+//    if(false == m_connect)
+//    {
+//        FLIClose(dev_filterWheel);
+//        InitCFW12();
+//    }
 }
 
