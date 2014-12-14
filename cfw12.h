@@ -3,17 +3,22 @@
 
 #include "libfli.h"
 #include <stdio.h>
+#include <QTimer>
 #define LIBVERSIZE 500
 #define MAX_PATH 260
 #define FLIFILTERWHEELCTRL_VER "0.01"
 
-class CFW12
+class CFW12: public QObject
 {
+    Q_OBJECT
 public:
-    CFW12();
+    explicit CFW12(QObject *parent = 0);
     ~CFW12();
     bool GetConnStatus();
     char* GetLibVer();
+
+private slots:
+    void CheckConn();
 
 public:
     void SetWheelPos(long filter);
@@ -27,6 +32,9 @@ private:
     flidev_t dev_filterWheel;
     char file[MAX_PATH], name[MAX_PATH];
     long status;
+    QTimer *timer;
+
+
 
 protected:
 

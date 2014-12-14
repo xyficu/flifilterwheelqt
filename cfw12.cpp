@@ -1,10 +1,16 @@
 #include "cfw12.h"
 
-CFW12::CFW12()
+CFW12::CFW12(QObject *parent) :
+  QObject(parent)
 {
     dev_filterWheel = FLI_INVALID_DEVICE;
     status = 0;
+
+    timer = new QTimer(this);
     InitCFW12();
+
+    connect(timer, SIGNAL(timeout()), this, SLOT(CheckConn()));
+    timer->start(100);
 }
 
 CFW12::~CFW12()
@@ -31,9 +37,7 @@ void CFW12::SetWheelPos(long filter)
         return;
     else
     {
-        status = 2;
         FLISetFilterPos(dev_filterWheel, filter);
-        status = 0;
         return;
     }
 }
@@ -91,5 +95,11 @@ void CFW12::InitCFW12()
         m_connect = false;
         return;
     }
+}
+
+void CFW12::CheckConn()
+{
+    if(false == m_connect)
+        InitCFW12();
 }
 
