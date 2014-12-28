@@ -8,6 +8,7 @@
 #include <QDate>
 #include "cfw12.h"
 #include "about.h"
+#include "cfwthread.h"
 
 namespace Ui {
 class MainWindow;
@@ -52,6 +53,12 @@ private slots:
 
     void on_action_About_triggered();
 
+    void on_pushButton_clicked();
+
+    void on_stopButton_clicked();
+
+    void on_startButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     CFW12 *m_CFW12;
@@ -60,6 +67,7 @@ private:
     QDate m_date;
     QDateTime m_dateTime;
     void SetFWPos(long pos);
+    CFWThread m_cfw;
 
 };
 

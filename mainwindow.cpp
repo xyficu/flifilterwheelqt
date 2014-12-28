@@ -142,3 +142,20 @@ void MainWindow::on_action_About_triggered()
     About a(this);
     a.exec();
 }
+
+
+void MainWindow::on_stopButton_clicked()
+{
+    m_cfw.stop();
+    ui->startButton->setEnabled(true);
+    ui->stopButton->setEnabled(false);
+}
+
+void MainWindow::on_startButton_clicked()
+{
+    if(!m_cfw.isRunning()){
+        m_cfw.start();
+        ui->startButton->setEnabled(false);
+        ui->stopButton->setEnabled(true);
+    }
+}

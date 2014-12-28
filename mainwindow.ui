@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>345</width>
+    <width>486</width>
     <height>300</height>
    </rect>
   </property>
@@ -455,19 +455,47 @@
      </item>
     </layout>
    </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>60</y>
+      <width>101</width>
+      <height>62</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QPushButton" name="startButton">
+       <property name="text">
+        <string>start</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="stopButton">
+       <property name="text">
+        <string>stop</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>label</zorder>
    <zorder>labelFLI</zorder>
    <zorder>label_CurPos</zorder>
    <zorder>label_libVer</zorder>
    <zorder>label_time</zorder>
+   <zorder>startButton</zorder>
+   <zorder>stopButton</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>345</width>
+     <width>486</width>
      <height>25</height>
     </rect>
    </property>
