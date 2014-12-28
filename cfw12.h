@@ -4,7 +4,7 @@
 #include "libfli.h"
 #include <stdio.h>
 #include <QTimer>
-#define LIBVERSIZE 500
+#define LIBVERSIZE 100
 #define MAX_PATH 260
 #define FLIFILTERWHEELCTRL_VER "0.01"
 
@@ -18,7 +18,7 @@ public:
     char* GetLibVer();
 
 private slots:
-    void CheckConn();
+    void ReConn();
 
 public:
     void SetWheelPos(long filter);

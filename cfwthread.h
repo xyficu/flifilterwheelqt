@@ -17,10 +17,17 @@ protected:
 
 private:
     volatile bool stopped;
+    CFW12 filterWheel;
 
 signals:
 
 public slots:
+    //
+    void GetWPos(long &pos);
+    void SetWPos(long pos);
+    void GetWStatus(long pos);
+    void GetLibVer(char** libVer);
+    void GetWConStatus(bool &conStatus);
 
 };
 
