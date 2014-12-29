@@ -4,7 +4,7 @@
 #include "libfli.h"
 #include <stdio.h>
 #include <QTimer>
-#define LIBVERSIZE 500
+#define LIBVERSIZE 100
 #define MAX_PATH 260
 #define FLIFILTERWHEELCTRL_VER "0.01"
 
@@ -18,13 +18,14 @@ public:
     char* GetLibVer();
 
 private slots:
-    void CheckConn();
+    void ReConn();
 
 public:
     void SetWheelPos(long filter);
     void GetWheelPos(long &filter);
     long GetStatus();
     void InitCFW12();
+    void SetStatus(long value);
 
 private:
     bool m_connect;
@@ -33,6 +34,7 @@ private:
     char file[MAX_PATH], name[MAX_PATH];
     long status;
     QTimer *timer;
+
 
 
 
