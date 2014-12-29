@@ -5,7 +5,6 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
-
     ui->setupUi(this);
 
     //set window tilte
@@ -16,23 +15,17 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_timer, SIGNAL(timeout()), SLOT(UpdateStatus()));
     m_timer->start(100);
 
-    //start the cfw thread
-    m_cfw.start();
-
-    //connect filterwheel signals
-    connect(this, SIGNAL(MainGetWPos(long &)), &m_cfw, SLOT(GetWPos(long &)), Qt::DirectConnection);
-    connect(this, SIGNAL(MainSetWPos(long)), &m_cfw, SLOT(SetWPos(long)));
-    connect(this, SIGNAL(MainGetWStatus(long &)), &m_cfw, SLOT(GetWStatus(long &)), Qt::DirectConnection);
-    connect(this, SIGNAL(MainGetWLibVer(char**)), &m_cfw, SLOT(GetLibVer(char**)), Qt::DirectConnection);
-    connect(this, SIGNAL(MainGetWConStatus(bool&)), &m_cfw, SLOT(GetWConStatus(bool&)), Qt::DirectConnection);
+    //initial CFW
+    m_CFW12 = new CFW12();
+    ui->label_libVer->setText(m_CFW12->GetLibVer());
+    ui->label_libVer->adjustSize();
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    m_cfw.stop();
-    m_cfw.wait();
+    delete m_CFW12;
 }
 
 void MainWindow::SetFWPos(long pos)
@@ -44,83 +37,82 @@ void MainWindow::SetFWPos(long pos)
     }
 }
 
-
-void MainWindow::on_pushButtonFWHome_clicked()
-{
-    emit MainSetWPos(0);
-}
-
 void MainWindow::on_pushButtonFW1_clicked()
 {
-    emit MainSetWPos(1);
+    SetFWPos(1);
 }
 
 void MainWindow::on_pushButtonFW2_clicked()
 {
-    emit MainSetWPos(2);
+    SetFWPos(2);
+}
+
+void MainWindow::on_pushButtonFWHome_clicked()
+{
+    SetFWPos(0);
 }
 
 void MainWindow::on_pushButtonFW3_clicked()
 {
-    emit MainSetWPos(3);
+    SetFWPos(3);
 }
 
 void MainWindow::on_pushButtonFW4_clicked()
 {
-    emit MainSetWPos(4);
+    SetFWPos(4);
 }
 
 void MainWindow::on_pushButtonFW5_clicked()
 {
-    emit MainSetWPos(5);
+    SetFWPos(5);
 }
 
 void MainWindow::on_pushButtonFW6_clicked()
 {
-    emit MainSetWPos(6);
+    SetFWPos(6);
 }
 
 void MainWindow::on_pushButtonFW7_clicked()
 {
-    emit MainSetWPos(7);
+    SetFWPos(7);
 }
 
 void MainWindow::on_pushButtonFW8_clicked()
 {
-    emit MainSetWPos(8);
+    SetFWPos(8);
 }
 
 void MainWindow::on_pushButtonFW9_clicked()
 {
-    emit MainSetWPos(9);
+    SetFWPos(9);
 }
 
 void MainWindow::on_pushButtonFW10_clicked()
 {
-    emit MainSetWPos(10);
+    SetFWPos(10);
 }
 
 void MainWindow::on_pushButtonFW11_clicked()
 {
-    emit MainSetWPos(11);
+    SetFWPos(11);
 }
 
 void MainWindow::UpdateStatus()
 {
-    //get the fliter wheel sdk version
-    emit MainGetWLibVer(&libVer);
-    ui->label_libVer->setText(libVer);
-    ui->label_libVer->adjustSize();
+    //try to connect the fliter wheel per 100ms
+    if(false == m_CFW12->GetConnStatus())
+        m_CFW12->InitCFW12();
 
-    //update status
+    //try to update status per 100ms
     long pos=0;
-    bool conStatus = true;
-    emit MainGetWConStatus(conStatus);
-    if(true == conStatus)
+    if(true == m_CFW12->GetConnStatus())
     {
         ui->labelFLI->setText("FLI Filter Wheel connected!");
-
-        emit MainGetWPos(pos);
+//        if(2 == m_CFW12->GetStatus())
+//            ui->label_Status->setText("Moving...");
+//        else
+//            ui->label_Status->setText("Stopped");
+        m_CFW12->GetWheelPos(pos);
         ui->label_CurPos->setText(QString::number(pos));
     }
     else
@@ -135,6 +127,7 @@ void MainWindow::UpdateStatus()
 
     //adjust label size
     ui->labelFLI->adjustSize();
+//    ui->label_Status->adjustSize();
     ui->label_CurPos->adjustSize();
 
 }
@@ -148,15 +141,4 @@ void MainWindow::on_action_About_triggered()
 {
     About a(this);
     a.exec();
-}
-
-
-
-
-void MainWindow::on_pushButton_clicked()
-{
-
-    emit MainGetWLibVer(&libVer);
-    ui->label_libVer->setText(libVer);
-    ui->label_libVer->adjustSize();
 }

@@ -1,5 +1,4 @@
 #include "cfw12.h"
-#include "QDebug"
 
 CFW12::CFW12(QObject *parent) :
   QObject(parent)
@@ -10,7 +9,7 @@ CFW12::CFW12(QObject *parent) :
     timer = new QTimer(this);
     InitCFW12();
 
-    connect(timer, SIGNAL(timeout()), this, SLOT(ReConn()));
+    connect(timer, SIGNAL(timeout()), this, SLOT(CheckConn()));
     timer->start(100);
 }
 
@@ -98,7 +97,7 @@ void CFW12::InitCFW12()
     }
 }
 
-void CFW12::ReConn()
+void CFW12::CheckConn()
 {
 //    //获取FLI设备列表
 //    if (0 != FLICreateList(FLIDOMAIN_USB | FLIDEVICE_FILTERWHEEL))
@@ -115,6 +114,5 @@ void CFW12::ReConn()
 //        FLIClose(dev_filterWheel);
 //        InitCFW12();
 //    }
-    qDebug()<<QString("ReConn");
 }
 
