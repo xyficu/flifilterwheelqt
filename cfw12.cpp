@@ -1,4 +1,5 @@
 #include "cfw12.h"
+#include "QDebug"
 
 CFW12::CFW12(QObject *parent) :
   QObject(parent)
@@ -114,5 +115,6 @@ void CFW12::ReConn()
 //        FLIClose(dev_filterWheel);
 //        InitCFW12();
 //    }
+    qDebug()<<QString("ReConn");
 }
 

@@ -18,11 +18,17 @@ void CFWThread::run()
 {
     qreal i = 0;
     while(!stopped){
+        filterWheel.ReConn();
         qDebug()<<QString("in CFWThread: %1").arg(i);
         msleep(1000);
         i++;
     }
     stopped=false;
+}
+
+void CFWThread::LogToFile(QString str)
+{
+
 }
 
 void CFWThread::GetWPos(long &pos)
@@ -35,7 +41,7 @@ void CFWThread::SetWPos(long pos)
     filterWheel.SetWheelPos(pos);
 }
 
-void CFWThread::GetWStatus(long pos)
+void CFWThread::GetWStatus(long &pos)
 {
     pos = filterWheel.GetStatus();
 }

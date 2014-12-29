@@ -22,7 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //connect filterwheel signals
     connect(this, SIGNAL(MainGetWPos(long &)), &m_cfw, SLOT(GetWPos(long &)), Qt::DirectConnection);
     connect(this, SIGNAL(MainSetWPos(long)), &m_cfw, SLOT(SetWPos(long)));
-    connect(this, SIGNAL(MainGetWStatus(long)), &m_cfw, SLOT(GetWStatus(long)));
+    connect(this, SIGNAL(MainGetWStatus(long &)), &m_cfw, SLOT(GetWStatus(long &)), Qt::DirectConnection);
     connect(this, SIGNAL(MainGetWLibVer(char**)), &m_cfw, SLOT(GetLibVer(char**)), Qt::DirectConnection);
     connect(this, SIGNAL(MainGetWConStatus(bool&)), &m_cfw, SLOT(GetWConStatus(bool&)), Qt::DirectConnection);
 
@@ -44,6 +44,12 @@ void MainWindow::SetFWPos(long pos)
     }
 }
 
+
+void MainWindow::on_pushButtonFWHome_clicked()
+{
+    emit MainSetWPos(0);
+}
+
 void MainWindow::on_pushButtonFW1_clicked()
 {
     emit MainSetWPos(1);
@@ -52,11 +58,6 @@ void MainWindow::on_pushButtonFW1_clicked()
 void MainWindow::on_pushButtonFW2_clicked()
 {
     emit MainSetWPos(2);
-}
-
-void MainWindow::on_pushButtonFWHome_clicked()
-{
-    emit MainSetWPos(0);
 }
 
 void MainWindow::on_pushButtonFW3_clicked()

@@ -70,7 +70,7 @@ private:
 signals:
     void MainGetWPos(long &pos);
     void MainSetWPos(long pos);
-    void MainGetWStatus(long status);
+    void MainGetWStatus(long &status);
     void MainGetWLibVer(char **libVer);
     void MainGetWConStatus(bool &conStatus);
 

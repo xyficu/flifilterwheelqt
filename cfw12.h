@@ -18,13 +18,14 @@ public:
     char* GetLibVer();
 
 private slots:
-    void ReConn();
+
 
 public:
     void SetWheelPos(long filter);
     void GetWheelPos(long &filter);
     long GetStatus();
     void InitCFW12();
+    void ReConn();
 
 private:
     bool m_connect;
