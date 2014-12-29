@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "QDebug"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -112,8 +113,8 @@ void MainWindow::UpdateStatus()
     ui->label_libVer->setText(libVer);
     ui->label_libVer->adjustSize();
 
-    //update status
-    long pos=0;
+    //update connection status
+    long pos=0;    
     bool conStatus = true;
     emit MainGetWConStatus(conStatus);
     if(true == conStatus)
@@ -125,6 +126,14 @@ void MainWindow::UpdateStatus()
     }
     else
         ui->labelFLI->setText("FLI Filter Wheel not connected!");
+
+    //update moving status
+//    long status=0;
+//    emit MainGetWStatus(status);
+//    if(0!=status)
+//        ui->label_CurStatus->setText("Moving...");
+//    else
+//        ui->label_CurStatus->setText("Stopped.");
 
     //update time
     m_dateTime.setTime(m_time.currentTime());

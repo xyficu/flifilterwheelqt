@@ -59,12 +59,15 @@ void CFW12::GetWheelPos(long &filter)
 
 long CFW12::GetStatus()
 {
+//    long count = 0;
+//    FLIGetActiveWheel(dev_filterWheel, &count);
     return status;
 }
 
 void CFW12::InitCFW12()
 {
     //test if lib loads correctly
+
     if(FLIGetLibVersion(libver, LIBVERSIZE) != 0)
     {
         m_connect = false;
@@ -98,6 +101,11 @@ void CFW12::InitCFW12()
     }
 }
 
+void CFW12::SetStatus(long value)
+{
+    status=value;
+}
+
 void CFW12::ReConn()
 {
 //    //获取FLI设备列表
@@ -115,6 +123,6 @@ void CFW12::ReConn()
 //        FLIClose(dev_filterWheel);
 //        InitCFW12();
 //    }
-    qDebug()<<QString("ReConn");
+//    qDebug()<<QString("ReConn");
 }
 

@@ -18,14 +18,14 @@ public:
     char* GetLibVer();
 
 private slots:
-
+    void ReConn();
 
 public:
     void SetWheelPos(long filter);
     void GetWheelPos(long &filter);
     long GetStatus();
     void InitCFW12();
-    void ReConn();
+    void SetStatus(long value);
 
 private:
     bool m_connect;
@@ -34,6 +34,7 @@ private:
     char file[MAX_PATH], name[MAX_PATH];
     long status;
     QTimer *timer;
+
 
 
 

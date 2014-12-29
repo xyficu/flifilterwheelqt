@@ -27,7 +27,7 @@ public slots:
     //
     void GetWPos(long &pos);
     void SetWPos(long pos);
-    void GetWStatus(long &pos);
+    void GetWStatus(long &status);
     void GetLibVer(char** libVer);
     void GetWConStatus(bool &conStatus);
 
