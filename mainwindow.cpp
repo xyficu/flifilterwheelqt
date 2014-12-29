@@ -160,12 +160,3 @@ void MainWindow::on_action_About_triggered()
 }
 
 
-
-
-void MainWindow::on_pushButton_clicked()
-{
-
-    emit MainGetWLibVer(&libVer);
-    ui->label_libVer->setText(libVer);
-    ui->label_libVer->adjustSize();
-}
