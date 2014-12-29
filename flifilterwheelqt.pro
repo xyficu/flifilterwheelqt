@@ -18,13 +18,11 @@ TEMPLATE = app
 SOURCES += main.cpp\
         mainwindow.cpp \
     cfw12.cpp \
-    about.cpp \
-    cfwthread.cpp
+    about.cpp
 
 HEADERS  += mainwindow.h \
     cfw12.h \
-    about.h \
-    cfwthread.h
+    about.h
 
 
 FORMS    += mainwindow.ui \
