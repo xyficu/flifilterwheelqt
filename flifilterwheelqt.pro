@@ -19,12 +19,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     cfw12.cpp \
     about.cpp \
-    cfwthread.cpp
+    cfwthread.cpp \
+    cfwtcp.cpp
 
 HEADERS  += mainwindow.h \
     cfw12.h \
     about.h \
-    cfwthread.h
+    cfwthread.h \
+    cfwtcp.h
 
 
 FORMS    += mainwindow.ui \
