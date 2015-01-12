@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "QDebug"
 
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -17,32 +18,28 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(m_timer, SIGNAL(timeout()), SLOT(UpdateStatus()));
     m_timer->start(100);
 
-    //start the cfw thread
-    m_cfw.start();
+    //move cfw object to the thread
+    m_cfw.moveToThread(&m_cfwThread);
 
     //connect filterwheel signals
-    connect(this, SIGNAL(MainGetWPos(long &)), &m_cfw, SLOT(GetWPos(long &)), Qt::DirectConnection);
-    connect(this, SIGNAL(MainSetWPos(long)), &m_cfw, SLOT(SetWPos(long)));
-    connect(this, SIGNAL(MainGetWStatus(long &)), &m_cfw, SLOT(GetWStatus(long &)), Qt::DirectConnection);
-    connect(this, SIGNAL(MainGetWLibVer(char**)), &m_cfw, SLOT(GetLibVer(char**)), Qt::DirectConnection);
-    connect(this, SIGNAL(MainGetWConStatus(bool&)), &m_cfw, SLOT(GetWConStatus(bool&)), Qt::DirectConnection);
+    connect(this, SIGNAL(MainGetWPos(long*)), &m_cfw, SLOT(GetWheelPos(long*)), Qt::DirectConnection);
+    connect(this, SIGNAL(MainSetWPos(long)), &m_cfw, SLOT(SetWheelPos(long)), Qt::QueuedConnection);
+    connect(this, SIGNAL(MainGetWMoveStatus(long*)), &m_cfw, SLOT(GetWheelMoveStatus(long*)), Qt::DirectConnection);
+    connect(this, SIGNAL(MainGetWConnStatus(bool*)), &m_cfw, SLOT(GetWheelConnStatus(bool*)), Qt::DirectConnection);
+    connect(this, SIGNAL(MainGetWLibVer(char**)), &m_cfw, SLOT(GetWheelLibVer(char**)), Qt::DirectConnection);
+    connect(this, SIGNAL(MainStopWTimer()), &m_cfw, SLOT(StopTimer()), Qt::QueuedConnection);
+
+    m_cfwThread.start();
 
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
-    m_cfw.stop();
-    m_cfw.wait();
-}
-
-void MainWindow::SetFWPos(long pos)
-{
-    if(true == m_CFW12->GetConnStatus())
-    {
-        m_CFW12->SetWheelPos(pos);
-        ui->label_CurPos->setText(QString::number(pos));
-    }
+    emit MainStopWTimer();
+    m_cfwThread.quit();
+    m_cfwThread.wait();
+    m_cfwThread.deleteLater();
 }
 
 
@@ -108,37 +105,40 @@ void MainWindow::on_pushButtonFW11_clicked()
 
 void MainWindow::UpdateStatus()
 {
+    QTime time;
+    time.start();
     //get the fliter wheel sdk version
     emit MainGetWLibVer(&libVer);
     ui->label_libVer->setText(libVer);
     ui->label_libVer->adjustSize();
 
     //update connection status
-    long pos=0;    
-    bool conStatus = true;
-    emit MainGetWConStatus(conStatus);
-    if(true == conStatus)
+    long pos=0;
+    bool connStatus = false;
+    emit MainGetWConnStatus(&connStatus);
+    if(true == connStatus)
     {
         ui->labelFLI->setText("FLI Filter Wheel connected!");
 
-        emit MainGetWPos(pos);
+        emit MainGetWPos(&pos);
         ui->label_CurPos->setText(QString::number(pos));
     }
     else
         ui->labelFLI->setText("FLI Filter Wheel not connected!");
 
+
     //update moving status
-//    long status=0;
-//    emit MainGetWStatus(status);
-//    if(0!=status)
-//        ui->label_CurStatus->setText("Moving...");
-//    else
-//        ui->label_CurStatus->setText("Stopped.");
+    long status=0;
+    emit MainGetWMoveStatus(&status);
+    if(1 == status && true == connStatus)
+        ui->label_CurStatus->setText("Moving...");
+    else
+        ui->label_CurStatus->setText("Stopped.");
 
     //update time
     m_dateTime.setTime(m_time.currentTime());
     m_dateTime.setDate(m_date.currentDate());
-    QString currentDateTime = m_dateTime.toString("yyyy-mm-dd hh:mm:ss");
+    QString currentDateTime = m_dateTime.toString("yyyy-MM-dd hh:mm:ss");
     ui->label_time->setText(currentDateTime);
     ui->label_time->adjustSize();
 

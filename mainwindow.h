@@ -8,7 +8,9 @@
 #include <QDate>
 #include "cfw12.h"
 #include "about.h"
-#include "cfwthread.h"
+#include <QMetaType>
+#include <QThread>
+
 
 namespace Ui {
 class MainWindow;
@@ -62,16 +64,17 @@ private:
     QTime m_time;
     QDate m_date;
     QDateTime m_dateTime;
-    void SetFWPos(long pos);
-    CFWThread m_cfw;
+    CFW12 m_cfw;
+    QThread m_cfwThread;
     char *libVer;
 
 signals:
-    void MainGetWPos(long &pos);
+    void MainGetWPos(long *pos);
     void MainSetWPos(long pos);
-    void MainGetWStatus(long &status);
-    void MainGetWLibVer(char **libVer);
-    void MainGetWConStatus(bool &conStatus);
+    void MainGetWMoveStatus(long *status);
+    void MainGetWLibVer(char **value);
+    void MainGetWConnStatus(bool *conStatus);
+    void MainStopWTimer();
 
 };
 

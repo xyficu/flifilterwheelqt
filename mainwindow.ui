@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>332</width>
+    <width>337</width>
     <height>306</height>
    </rect>
   </property>
@@ -79,7 +79,7 @@
      <string>TextLabel</string>
     </property>
    </widget>
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>11</x>
@@ -439,19 +439,47 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label_CurStatus">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>50</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>67</width>
+      <height>17</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Status:</string>
+    </property>
+   </widget>
    <zorder>layoutWidget</zorder>
    <zorder>label</zorder>
    <zorder>labelFLI</zorder>
    <zorder>label_CurPos</zorder>
    <zorder>label_libVer</zorder>
    <zorder>label_time</zorder>
+   <zorder>label_CurStatus</zorder>
+   <zorder>label_2</zorder>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>332</width>
+     <width>337</width>
      <height>25</height>
     </rect>
    </property>

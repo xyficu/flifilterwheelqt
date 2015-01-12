@@ -5,6 +5,7 @@
 #-------------------------------------------------
 
 QT       += core gui
+QT += network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -19,14 +20,14 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     cfw12.cpp \
     about.cpp \
-    cfwthread.cpp \
     cfwtcp.cpp
 
 HEADERS  += mainwindow.h \
     cfw12.h \
     about.h \
-    cfwthread.h \
-    cfwtcp.h
+    cfwtcp.h \
+    cfwtcpcmd.h \
+    cfwtcpparams.h
 
 
 FORMS    += mainwindow.ui \

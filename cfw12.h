@@ -14,29 +14,27 @@ class CFW12: public QObject
 public:
     explicit CFW12(QObject *parent = 0);
     ~CFW12();
-    bool GetConnStatus();
-    char* GetLibVer();
 
 private slots:
     void ReConn();
+    void SetMoveStatus(long value);
 
-public:
-    void SetWheelPos(long filter);
-    void GetWheelPos(long &filter);
-    long GetStatus();
+    void SetWheelPos(long pos);
+    void GetWheelPos(long *pos);
+    void GetWheelMoveStatus(long *value);
+    void GetWheelConnStatus(bool *value);
+    void GetWheelLibVer(char **value);
     void InitCFW12();
-    void SetStatus(long value);
+    void StopTimer();
+
 
 private:
     bool m_connect;
     char libver[LIBVERSIZE];
     flidev_t dev_filterWheel;
     char file[MAX_PATH], name[MAX_PATH];
-    long status;
+    long m_movStatus;
     QTimer *timer;
-
-
-
 
 protected:
 
