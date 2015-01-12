@@ -4,7 +4,7 @@
 #include <QObject>
 #include "cfwtcpcmd.h"
 #include <QAbstractSocket>
-#include <QThread>
+#include "cfwtcpparams.h"
 
 class QTcpSocket;
 
@@ -24,9 +24,9 @@ private:
     QTcpSocket *tcpSocket;
     QString message;
     quint16 blockSize;
-
-
     void ResolveMessage(QString message);
+
+    WheelStatus cfwStatus;
 
 
 private slots:
@@ -37,7 +37,7 @@ private slots:
 signals:
     void SetWPos(long pos);
     void GetWpos(long *pos);
-    void GetWStatus(long *status);
+    void GetWStatus(long *curPos, long *movStatus);
 
 public slots:
 };

@@ -110,6 +110,12 @@ void CFW12::StopTimer()
     timer->stop();
 }
 
+void CFW12::GetWheelStatus(long *curPos, long *movStatus)
+{
+    GetWheelPos(curPos);
+    GetWheelMoveStatus(movStatus);
+}
+
 void CFW12::SetMoveStatus(long value)
 {
     m_movStatus=value;
@@ -133,7 +139,7 @@ void CFW12::ReConn()
     {
         FLIClose(dev_filterWheel);
         InitCFW12();
-        qDebug()<<QString("ReConn...");
+//        qDebug()<<QString("ReConn...");
 
     }
 

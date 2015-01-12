@@ -20,8 +20,9 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //move cfw object to the thread
     m_cfw.moveToThread(&m_cfwThread);
+    m_cfwThread.start();
 
-    //connect filterwheel signals
+    //connect UI signals to filterwheel slots
     connect(this, SIGNAL(MainGetWPos(long*)), &m_cfw, SLOT(GetWheelPos(long*)), Qt::DirectConnection);
     connect(this, SIGNAL(MainSetWPos(long)), &m_cfw, SLOT(SetWheelPos(long)), Qt::QueuedConnection);
     connect(this, SIGNAL(MainGetWMoveStatus(long*)), &m_cfw, SLOT(GetWheelMoveStatus(long*)), Qt::DirectConnection);
@@ -30,8 +31,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, SIGNAL(MainStopWTimer()), &m_cfw, SLOT(StopTimer()), Qt::QueuedConnection);
     connect(this, SIGNAL(MainInitWheel()), &m_cfw, SLOT(InitCFW12()), Qt::DirectConnection);
 
-    m_cfwThread.start();
 
+    //connect tcp signals to filterwheel slots
+    connect(&cfwTcp, SIGNAL(GetWpos(long*)), &m_cfw, SLOT(GetWheelPos(long*)), Qt::DirectConnection);
+    connect(&cfwTcp, SIGNAL(SetWPos(long)), &m_cfw, SLOT(SetWheelPos(long)), Qt::QueuedConnection);
+    connect(&cfwTcp, SIGNAL(GetWStatus(long*,long*)), &m_cfw, SLOT(GetWheelStatus(long*,long*)), Qt::DirectConnection);
+
+    cfwTcp.New();
 }
 
 MainWindow::~MainWindow()

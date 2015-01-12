@@ -4,24 +4,15 @@
 CFWTcp::CFWTcp(QObject *parent) : QObject(parent)
 {
     tcpSocket = new QTcpSocket(this);
-//    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(ReadMessage()));
-//    connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),
-//            this, SLOT(DisplayError(QAbstractSocket::SocketError)));
+    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(ReadMessage()));
+    connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),
+            this, SLOT(DisplayError(QAbstractSocket::SocketError)));
 
-    //start the cfw in thread
-
-
-    //connect signal and slot
-//    connect(this, SIGNAL(GetWpos(long*)), &cfw, SLOT(GetWPos(long*)), Qt::AutoConnection);
-//    connect(this, SIGNAL(SetWPos(long)), &cfw, SLOT(SetWPos(long)), Qt::AutoConnection);
-//    connect(this, SIGNAL(GetWStatus(long*)), &cfw, SLOT(GetWStatus(long*)), Qt::AutoConnection);
 }
 
 CFWTcp::~CFWTcp()
 {
-    //stop cfw thread
-//    cfw.stop();
-//    cfw.wait();
+
 }
 
 
@@ -54,6 +45,9 @@ void CFWTcp::ResolveMessage(QString message)
         value = "";
         lt = cmdList[2];
         //emit signal get filter wheel status
+        emit GetWStatus(&cfwStatus.curPos, &cfwStatus.movStatus);
+        qDebug()<<"cfwStatus.curPos"<<cfwStatus.curPos;
+        qDebug()<<"cfwStatus.movStatus"<<cfwStatus.movStatus;
     }else
         return;
 
@@ -67,6 +61,7 @@ void CFWTcp::NewConnect()
     //cancel existed connection
     tcpSocket->abort();
     tcpSocket->connectToHost("190.168.1.115", 6666);
+
 }
 
 void CFWTcp::ReadMessage()

@@ -3,10 +3,9 @@
 
 #endif // CFWTCPPARAMS_H
 
-class CFWPARAMS{
+class WheelStatus{
 public:
-    qint16 pos;  //filter wheel position
-    bool isMoving; //filter move status
-
+    long curPos;
+    long movStatus;
 
 };

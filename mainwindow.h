@@ -10,6 +10,7 @@
 #include "about.h"
 #include <QMetaType>
 #include <QThread>
+#include "cfwtcp.h"
 
 
 namespace Ui {
@@ -67,6 +68,8 @@ private:
     CFW12 m_cfw;
     QThread m_cfwThread;
     char *libVer;
+
+    CFWTcp cfwTcp;
 
 signals:
     void MainGetWPos(long *pos);

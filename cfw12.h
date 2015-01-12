@@ -26,6 +26,7 @@ private slots:
     void GetWheelLibVer(char **value);
     void InitCFW12();
     void StopTimer();
+    void GetWheelStatus(long *curPos, long* movStatus);
 
 
 private:
