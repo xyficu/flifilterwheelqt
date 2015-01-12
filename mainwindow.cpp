@@ -28,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this, SIGNAL(MainGetWConnStatus(bool*)), &m_cfw, SLOT(GetWheelConnStatus(bool*)), Qt::DirectConnection);
     connect(this, SIGNAL(MainGetWLibVer(char**)), &m_cfw, SLOT(GetWheelLibVer(char**)), Qt::DirectConnection);
     connect(this, SIGNAL(MainStopWTimer()), &m_cfw, SLOT(StopTimer()), Qt::QueuedConnection);
+    connect(this, SIGNAL(MainInitWheel()), &m_cfw, SLOT(InitCFW12()), Qt::DirectConnection);
 
     m_cfwThread.start();
 
@@ -118,20 +119,20 @@ void MainWindow::UpdateStatus()
     emit MainGetWConnStatus(&connStatus);
     if(true == connStatus)
     {
-        ui->labelFLI->setText("FLI Filter Wheel connected!");
+        ui->labelFLI->setText("<font color=green>FLI Filter Wheel connected!</font>");
 
         emit MainGetWPos(&pos);
         ui->label_CurPos->setText(QString::number(pos));
     }
     else
-        ui->labelFLI->setText("FLI Filter Wheel not connected!");
+        ui->labelFLI->setText("<font color=red>FLI Filter Wheel not connected!</font>");
 
 
     //update moving status
     long status=0;
     emit MainGetWMoveStatus(&status);
     if(1 == status && true == connStatus)
-        ui->label_CurStatus->setText("Moving...");
+        ui->label_CurStatus->setText("<font color=red>Moving...</font>");
     else
         ui->label_CurStatus->setText("Stopped.");
 

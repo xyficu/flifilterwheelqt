@@ -119,14 +119,15 @@ void CFW12::SetMoveStatus(long value)
 void CFW12::ReConn()
 {
     //获取FLI设备列表
-    if (0 != FLICreateList(FLIDOMAIN_USB | FLIDEVICE_FILTERWHEEL))
-    {
-        m_connect = false;
-    }
-    else if (0 != FLIListFirst(&dev_filterWheel, file, MAX_PATH, name, MAX_PATH))
-    {
-        m_connect = false;
-    }
+//    if (0 != FLICreateList(FLIDOMAIN_USB | FLIDEVICE_FILTERWHEEL))
+//    {
+//        m_connect = false;
+//    }
+//    else if (0 != FLIListFirst(&dev_filterWheel, file, MAX_PATH, name, MAX_PATH))
+//    {
+//        m_connect = false;
+//    }
+
 
     if(false == m_connect)
     {

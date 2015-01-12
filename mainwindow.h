@@ -75,6 +75,7 @@ signals:
     void MainGetWLibVer(char **value);
     void MainGetWConnStatus(bool *conStatus);
     void MainStopWTimer();
+    void MainInitWheel();
 
 };
 
