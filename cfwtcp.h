@@ -33,6 +33,8 @@ private slots:
     void NewConnect();
     void ReadMessage();
     void DisplayError(QAbstractSocket::SocketError);
+    void RegisterDevice();
+    void DeregisterDevice();
 
 signals:
     void SetWPos(long pos);
