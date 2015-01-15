@@ -1,25 +1,20 @@
 #include "cfwtcp.h"
 #include <QTcpSocket>
+#include <QThread>
 
 CFWTcp::CFWTcp(QObject *parent) : QObject(parent)
 {
     tcpSocket = new QTcpSocket(this);
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(ReadMessage()));
-    connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),
-            this, SLOT(DisplayError(QAbstractSocket::SocketError)));
-    connect(tcpSocket, SIGNAL(connected()), this, SLOT(RegisterDevice()));
-    connect(tcpSocket, SIGNAL(aboutToClose()), this, SLOT(DeregisterDevice()));
+    connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(DisplayError(QAbstractSocket::SocketError)));
+    connect(tcpSocket, SIGNAL(connected()), this, SLOT(OnConnected()));
+    connect(tcpSocket, SIGNAL(aboutToClose()), this, SLOT(OnAboutToClose()));
+    connect(tcpSocket, SIGNAL(disconnected()), this, SLOT(OnDisconnected()));
 }
 
 CFWTcp::~CFWTcp()
 {
     tcpSocket->close();
-}
-
-
-void CFWTcp::New()
-{
-    NewConnect();
 }
 
 
@@ -84,6 +79,19 @@ void CFWTcp::ResolveMessage(QString message)
     }
 }
 
+void CFWTcp::ReConnToHost()
+{
+    //if socket is down try to reconnect to the host
+    tcpCon = false;
+    while(!tcpCon)
+    {
+        qDebug()<<"try to connect to host...";
+        tcpSocket->connectToHost("190.168.1.115", 30001);
+        tcpSocket->waitForConnected();
+        QThread::sleep(5);
+    }
+}
+
 void CFWTcp::NewConnect()
 {
     //
@@ -91,8 +99,9 @@ void CFWTcp::NewConnect()
 
     //cancel existed connection
     tcpSocket->abort();
-    tcpSocket->connectToHost("190.168.1.115", 30001);
-
+//    tcpSocket->connectToHost("190.168.1.115", 30001);
+//    tcpSocket->waitForConnected();
+    ReConnToHost();
 
 }
 
@@ -113,14 +122,33 @@ void CFWTcp::ReadMessage()
 
 void CFWTcp::DisplayError(QAbstractSocket::SocketError)
 {
-    qDebug()<<tcpSocket->errorString();
+    qDebug()<<"socket error:"<<tcpSocket->errorString();
 }
+
+void CFWTcp::OnConnected()
+{
+    tcpCon = true;
+    qDebug()<<"connect to host"<<":"<<tcpSocket->peerPort()<<"successfully!";
+    RegisterDevice();
+}
+
+void CFWTcp::OnDisconnected()
+{
+    ReConnToHost();
+}
+
+void CFWTcp::OnAboutToClose()
+{
+    DeregisterDevice();
+}
+
 
 void CFWTcp::RegisterDevice()
 {
     //send register message
     QByteArray deviceRegMsg = QByteArray("WHEEL");
     tcpSocket->write(deviceRegMsg);
+    tcpSocket->waitForBytesWritten();
 
 }
 

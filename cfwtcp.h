@@ -24,17 +24,23 @@ private:
     QTcpSocket *tcpSocket;
     QString message;
     quint16 blockSize;
+    bool tcpCon;
     void ResolveMessage(QString message);
 
     WheelStatus cfwStatus;
+
+    void ReConnToHost();
+    void RegisterDevice();
+    void DeregisterDevice();
 
 
 private slots:
     void NewConnect();
     void ReadMessage();
     void DisplayError(QAbstractSocket::SocketError);
-    void RegisterDevice();
-    void DeregisterDevice();
+    void OnConnected();
+    void OnDisconnected();
+    void OnAboutToClose();
 
 signals:
     void SetWPos(long pos);

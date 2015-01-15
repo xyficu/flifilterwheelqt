@@ -37,7 +37,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(&cfwTcp, SIGNAL(SetWPos(long)), &m_cfw, SLOT(SetWheelPos(long)), Qt::QueuedConnection);
     connect(&cfwTcp, SIGNAL(GetWStatus(long*,long*)), &m_cfw, SLOT(GetWheelStatus(long*,long*)), Qt::DirectConnection);
 
-    cfwTcp.New();
+    //set up ui signal to tcp slots
+    connect(this, SIGNAL(MainStartConToHost()), &cfwTcp, SLOT(NewConnect()), Qt::QueuedConnection);
+
+    cfwTcp.moveToThread(&cfwTcpThread);
+    cfwTcpThread.start();
+
+    emit MainStartConToHost();
 }
 
 MainWindow::~MainWindow()
@@ -47,6 +53,10 @@ MainWindow::~MainWindow()
     m_cfwThread.quit();
     m_cfwThread.wait();
     m_cfwThread.deleteLater();
+
+    cfwTcpThread.quit();
+    cfwTcpThread.wait();
+    cfwTcpThread.deleteLater();
 }
 
 

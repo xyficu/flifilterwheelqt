@@ -70,6 +70,7 @@ private:
     char *libVer;
 
     CFWTcp cfwTcp;
+    QThread cfwTcpThread;
 
 signals:
     void MainGetWPos(long *pos);
@@ -79,6 +80,7 @@ signals:
     void MainGetWConnStatus(bool *conStatus);
     void MainStopWTimer();
     void MainInitWheel();
+    void MainStartConToHost();
 
 };
 
