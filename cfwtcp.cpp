@@ -1,6 +1,7 @@
 #include "cfwtcp.h"
 #include <QTcpSocket>
 #include <QThread>
+#include <QHostAddress>
 
 CFWTcp::CFWTcp(QObject *parent) : QObject(parent)
 {
@@ -105,6 +106,11 @@ void CFWTcp::NewConnect()
 
 }
 
+void CFWTcp::StopConnect()
+{
+    tcpCon = true;
+}
+
 void CFWTcp::ReadMessage()
 {
     //receive tcp message
@@ -128,7 +134,7 @@ void CFWTcp::DisplayError(QAbstractSocket::SocketError)
 void CFWTcp::OnConnected()
 {
     tcpCon = true;
-    qDebug()<<"connect to host"<<":"<<tcpSocket->peerPort()<<"successfully!";
+    qDebug()<<"connect to host"<<tcpSocket->peerAddress().toString()<<":"<<tcpSocket->peerPort()<<"successfully!";
     RegisterDevice();
 }
 

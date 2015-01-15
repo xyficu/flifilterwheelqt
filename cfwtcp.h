@@ -36,6 +36,7 @@ private:
 
 private slots:
     void NewConnect();
+    void StopConnect();
     void ReadMessage();
     void DisplayError(QAbstractSocket::SocketError);
     void OnConnected();

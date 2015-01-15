@@ -81,6 +81,7 @@ signals:
     void MainStopWTimer();
     void MainInitWheel();
     void MainStartConToHost();
+    void MainStopConToHost();
 
 };
 

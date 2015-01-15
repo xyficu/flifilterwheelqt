@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     //set up ui signal to tcp slots
     connect(this, SIGNAL(MainStartConToHost()), &cfwTcp, SLOT(NewConnect()), Qt::QueuedConnection);
+    connect(this, SIGNAL(MainStopConToHost()), &cfwTcp, SLOT(StopConnect()), Qt::DirectConnection);
 
     cfwTcp.moveToThread(&cfwTcpThread);
     cfwTcpThread.start();
@@ -54,6 +55,7 @@ MainWindow::~MainWindow()
     m_cfwThread.wait();
     m_cfwThread.deleteLater();
 
+    emit MainStopConToHost();
     cfwTcpThread.quit();
     cfwTcpThread.wait();
     cfwTcpThread.deleteLater();
