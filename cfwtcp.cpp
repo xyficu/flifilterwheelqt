@@ -88,7 +88,7 @@ void CFWTcp::ReConnToHost()
     {
         qDebug()<<"try to connect to host...";
         tcpSocket->connectToHost("190.168.1.115", 30001);
-        tcpSocket->waitForConnected();
+        tcpSocket->waitForConnected(5000);
         QThread::sleep(5);
     }
 }
