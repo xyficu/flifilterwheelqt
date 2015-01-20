@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "QDebug"
+#include "modname.h"
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -179,3 +180,9 @@ void MainWindow::on_action_About_triggered()
 }
 
 
+
+void MainWindow::on_action_Set_Name_triggered()
+{
+//    ModName m(this);
+//    m.exec();
+}

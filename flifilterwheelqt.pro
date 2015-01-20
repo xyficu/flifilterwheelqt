@@ -20,18 +20,21 @@ SOURCES += main.cpp\
         mainwindow.cpp \
     cfw12.cpp \
     about.cpp \
-    cfwtcp.cpp
+    cfwtcp.cpp \
+    modname.cpp
 
 HEADERS  += mainwindow.h \
     cfw12.h \
     about.h \
     cfwtcp.h \
     cfwtcpcmd.h \
-    cfwtcpparams.h
+    cfwtcpparams.h \
+    modname.h
 
 
 FORMS    += mainwindow.ui \
-    about.ui
+    about.ui \
+    modname.ui
 
 
 

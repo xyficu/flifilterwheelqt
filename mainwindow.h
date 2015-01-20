@@ -58,6 +58,8 @@ private slots:
 
 
 
+    void on_action_Set_Name_triggered();
+
 private:
     Ui::MainWindow *ui;
     CFW12 *m_CFW12;
