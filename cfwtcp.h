@@ -5,6 +5,8 @@
 #include "cfwtcpcmd.h"
 #include <QAbstractSocket>
 #include "cfwtcpparams.h"
+#include <QTimer>
+#include <QDateTime>
 
 class QTcpSocket;
 
@@ -25,6 +27,8 @@ private:
     QString message;
     quint16 blockSize;
     bool tcpCon;
+    QTimer m_tmrHouseKp;
+    QDateTime m_dateTime;
     void ResolveMessage(QString message);
 
     WheelStatus cfwStatus;
@@ -42,6 +46,7 @@ private slots:
     void OnConnected();
     void OnDisconnected();
     void OnAboutToClose();
+    void HouseKeeping();
 
 signals:
     void SetWPos(long pos);

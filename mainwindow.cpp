@@ -141,7 +141,7 @@ void MainWindow::UpdateStatus()
         ui->labelFLI->setText("<font color=green>FLI Filter Wheel connected!</font>");
 
         emit MainGetWPos(&pos);
-        ui->label_CurPos->setText(QString::number(pos));
+        ui->label_CurPos->setText(QString::number(pos+1));
     }
     else
         ui->labelFLI->setText("<font color=red>FLI Filter Wheel not connected!</font>");

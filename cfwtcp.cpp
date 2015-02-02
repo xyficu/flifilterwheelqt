@@ -11,10 +11,13 @@ CFWTcp::CFWTcp(QObject *parent) : QObject(parent)
     connect(tcpSocket, SIGNAL(connected()), this, SLOT(OnConnected()));
     connect(tcpSocket, SIGNAL(aboutToClose()), this, SLOT(OnAboutToClose()));
     connect(tcpSocket, SIGNAL(disconnected()), this, SLOT(OnDisconnected()));
+    connect(&m_tmrHouseKp, SIGNAL(timeout()), this, SLOT(HouseKeeping()));
+    m_tmrHouseKp.start(10000);
 }
 
 CFWTcp::~CFWTcp()
 {
+    OnAboutToClose();
     tcpSocket->close();
 }
 
@@ -134,7 +137,8 @@ void CFWTcp::DisplayError(QAbstractSocket::SocketError)
 void CFWTcp::OnConnected()
 {
     tcpCon = true;
-    qDebug()<<"connect to host"<<tcpSocket->peerAddress().toString()<<":"<<tcpSocket->peerPort()<<"successfully!";
+    qDebug()<<"connect to host"<<tcpSocket->peerAddress().toString()<<":"
+           <<tcpSocket->peerPort()<<"successfully!";
     RegisterDevice();
 }
 
@@ -146,6 +150,22 @@ void CFWTcp::OnDisconnected()
 void CFWTcp::OnAboutToClose()
 {
     DeregisterDevice();
+}
+
+void CFWTcp::HouseKeeping()
+{
+
+    if(tcpCon == true)
+    {
+        //get local time YYYYMMDDTHHMMSS.SSS
+        m_dateTime=QDateTime::currentDateTime();
+        QString lt = m_dateTime.toString("yyyyMMddThhmmss.zzz");
+
+        //send HouseKeeping message
+        QByteArray msg = QByteArray("RW,HOUSEKEEPING,"+lt.toLatin1());
+        tcpSocket->write(msg);
+        tcpSocket->waitForBytesWritten();
+    }
 }
 
 
@@ -161,8 +181,8 @@ void CFWTcp::RegisterDevice()
 void CFWTcp::DeregisterDevice()
 {
     //send deregister message
-    QByteArray deviceRegMsg = QByteArray("RWHEEL");
-    tcpSocket->write(deviceRegMsg);
+    QByteArray deviceDeregMsg = QByteArray("RWHEEL");
+    tcpSocket->write(deviceDeregMsg);
     tcpSocket->waitForBytesWritten();
 
 }
