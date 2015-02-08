@@ -137,7 +137,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>8 Green</string>
+     <string>8</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW1">
@@ -172,7 +172,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>2 B</string>
+     <string>2</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW2">
@@ -207,7 +207,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>3 V</string>
+     <string>3</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW3">
@@ -242,7 +242,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>4 R</string>
+     <string>4</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW4">
@@ -277,7 +277,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>5 I</string>
+     <string>5</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW5">
@@ -312,7 +312,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>6 L</string>
+     <string>6</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW6">
@@ -347,7 +347,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>7 Red</string>
+     <string>7</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW9">
@@ -382,7 +382,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>10 Empty</string>
+     <string>10</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW8">
@@ -417,7 +417,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>9 Blue</string>
+     <string>9</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW10">
@@ -452,7 +452,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>11 Empty</string>
+     <string>11</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFW11">
@@ -487,7 +487,7 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>12 Empty</string>
+     <string>12</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButtonFWHome">
@@ -522,10 +522,21 @@
      <locale language="English" country="UnitedStates"/>
     </property>
     <property name="text">
-     <string>1 U</string>
+     <string>1</string>
     </property>
    </widget>
-   <zorder>layoutWidget</zorder>
+   <zorder>pushButtonFW7</zorder>
+   <zorder>pushButtonFW1</zorder>
+   <zorder>pushButtonFW2</zorder>
+   <zorder>pushButtonFW3</zorder>
+   <zorder>pushButtonFW4</zorder>
+   <zorder>pushButtonFW5</zorder>
+   <zorder>pushButtonFW6</zorder>
+   <zorder>pushButtonFW9</zorder>
+   <zorder>pushButtonFW8</zorder>
+   <zorder>pushButtonFW10</zorder>
+   <zorder>pushButtonFW11</zorder>
+   <zorder>pushButtonFWHome</zorder>
    <zorder>label</zorder>
    <zorder>labelFLI</zorder>
    <zorder>label_CurPos</zorder>
@@ -540,7 +551,7 @@
      <x>0</x>
      <y>0</y>
      <width>337</width>
-     <height>25</height>
+     <height>27</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFLI_Filter_Wheel_CFW_12_Controller">
